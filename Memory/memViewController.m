@@ -18,21 +18,29 @@
 {
     [super viewDidLoad];
     
-    buttons = @{@"1" : [self buttonOne],
-                @"2" : [self buttonTwo],
-                @"3" : [self buttonThree],
-                @"4" : [self buttonFour],
-                };
+    buttons = [NSArray arrayWithObjects:
+               [self buttonOne],
+               [self buttonTwo],
+               [self buttonThree],
+               [self buttonFour],
+               Nil
+                ];
     
     //1 is yellow, 2 is red
     //@1 is short for [NSNumber numberWithInt:1]
-    cards = @{@"1" : @1,
-              @"2" : @1,
-              @"3" : @2,
-              @"4" : @2,
-              };
+//    cards = @{@"1" : @1,
+//              @"2" : @1,
+//              @"3" : @2,
+//              @"4" : @2,
+//              };
+    cards = [NSArray arrayWithObjects:
+             @1,
+             @1,
+             @2,
+             @2,
+             Nil];
     
-    firstCard = @"0";
+    firstCard = @-1;
 //    secondCard = @"0";
     
     [[self buttonOne] setBackgroundColor:Nil];
@@ -45,9 +53,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)whichCardClicked:(NSString *)cardNumber
+- (void)whichCardClicked:(NSNumber *)cardNumber
 {
-    if ([firstCard  isEqual: @"0"]) {
+    if ([firstCard  isEqual: @-1]) {
         firstCard = cardNumber;
         NSLog(@"First card is %@.", firstCard);
     } else if ([firstCard isEqual: cardNumber]) {
@@ -55,31 +63,37 @@
         NSLog(@"You clicked on the same card!");
     } else {
         NSLog(@"Second card is %@.", cardNumber);
-        if ([self checkIf:firstCard Matches:cardNumber]) {
+        if ([self checkIf:(int)[firstCard integerValue] Matches:(int)[cardNumber integerValue]]) {
             NSLog(@"Match!");
-            [[buttons objectForKey:firstCard] setEnabled:NO];
-            [[buttons objectForKey:firstCard] setAlpha:(CGFloat)0.5];
-            [[buttons objectForKey:cardNumber] setEnabled:NO];
-            [[buttons objectForKey:cardNumber] setAlpha:(CGFloat)0.5];
+            [[buttons objectAtIndex:[firstCard integerValue]] setEnabled:NO];
+            [[buttons objectAtIndex:[firstCard integerValue]] setAlpha:(CGFloat)0.5];
+            [[buttons objectAtIndex:[cardNumber integerValue]] setEnabled:NO];
+            [[buttons objectAtIndex:[cardNumber integerValue]] setAlpha:(CGFloat)0.5];
             
-            firstCard = @"0";
+            firstCard = @-1;
         } else {
             NSLog(@"No match...");
-            [[buttons objectForKey:firstCard] setBackgroundColor:nil];
-            [[buttons objectForKey:cardNumber] setBackgroundColor:nil];
+            [UIView animateWithDuration:1 animations:^{
+                ((UIButton *)[buttons objectAtIndex:[firstCard integerValue]]).backgroundColor = [UIColor clearColor];
+            }];
+            [UIView animateWithDuration:1 animations:^{
+                ((UIButton *)[buttons objectAtIndex:[cardNumber integerValue]]).backgroundColor = [UIColor clearColor];
+            }];
             
             [self reloadInputViews];
             
-            firstCard = @"0";
+            firstCard = @-1;
         }
     }
 }
 
-- (BOOL)checkIf:(NSString *)card1 Matches:(NSString *)card2
+- (BOOL)checkIf:(int)card1 Matches:(int)card2
 {
     BOOL isMatch = NO;
+    
+//    NSNumber *color1 = [cards objectAtIndex:[card1 intValue]];
 
-    if ([[cards valueForKey:card1] isEqual:[cards valueForKey:card2]]) {
+    if ([cards[card1] isEqual:cards[card2]]) {
         isMatch = YES;
     }
     
@@ -87,24 +101,34 @@
 }
 
 - (IBAction)buttonOnePress:(id)sender {
-    [[self buttonOne] setBackgroundColor:(UIColor *)[UIColor redColor]];
-    [self whichCardClicked:@"1"];
+//    [[self buttonOne] setBackgroundColor:(UIColor *)[UIColor redColor]];
+    [UIView animateWithDuration:0.15 animations:^{
+        [self buttonOne].backgroundColor = [UIColor redColor];
+    }];
+    [self whichCardClicked:@0];
 }
 
 - (IBAction)buttonTwoPress:(id)sender {
-    [[self buttonTwo] setBackgroundColor:(UIColor *)[UIColor redColor]];
-    [self whichCardClicked:@"2"];
+//    [[self buttonTwo] setBackgroundColor:(UIColor *)[UIColor redColor]];
+    [UIView animateWithDuration:0.15 animations:^{
+        [self buttonTwo].backgroundColor = [UIColor redColor];
+    }];
+    [self whichCardClicked:@1];
 }
 
 - (IBAction)buttonThreePress:(id)sender {
-    [[self buttonThree] setBackgroundColor:(UIColor *)[UIColor yellowColor]];
-    [[self buttonThree] setNeedsDisplay];
-    [NSThread sleepForTimeInterval:(NSTimeInterval)2];
-    [self whichCardClicked:@"3"];
+//    [[self buttonThree] setBackgroundColor:(UIColor *)[UIColor yellowColor]];
+    [UIView animateWithDuration:0.15 animations:^{
+        [self buttonThree].backgroundColor = [UIColor yellowColor];
+    }];
+    [self whichCardClicked:@2];
 }
 
 - (IBAction)buttonFourPress:(id)sender {
-    [[self buttonFour] setBackgroundColor:(UIColor *)[UIColor yellowColor]];
-    [self whichCardClicked:@"4"];
+//    [[self buttonFour] setBackgroundColor:(UIColor *)[UIColor yellowColor]];
+    [UIView animateWithDuration:0.15 animations:^{
+        [self buttonFour].backgroundColor = [UIColor yellowColor];
+    }];
+    [self whichCardClicked:@3];
 }
 @end

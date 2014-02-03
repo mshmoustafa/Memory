@@ -10,15 +10,15 @@
 
 @interface memViewController : UIViewController
 {
-    NSDictionary *buttons;
+    NSArray *buttons;
     
-    NSDictionary *cards;
-    NSString *firstCard;
+    NSArray *cards;
+    NSNumber *firstCard;
 //    NSString *secondCard;
 }
 
-- (void)whichCardClicked:(NSString *)cardNumber;
-- (BOOL)checkIf:(NSString *)card1 Matches:(NSString *)card2;
+- (void)whichCardClicked:(NSNumber *)cardNumber;
+- (BOOL)checkIf:(int)card1 Matches:(int)card2;
 
 @property (weak, nonatomic) IBOutlet UIButton *buttonOne;
 - (IBAction)buttonOnePress:(id)sender;
