@@ -461,6 +461,7 @@
 				F0FA20731892F8A0000B8740 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F0FA20741892F8A0000B8740 /* Build configuration list for PBXNativeTarget "MemoryTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +470,7 @@
 				F0FA20761892F8A0000B8740 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
