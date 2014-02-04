@@ -284,6 +284,14 @@
                                     <action selector="cardPress:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="JLI-Jj-5a9"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8p-wD-28X">
+                                <rect key="frame" x="242" y="16" width="76" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="New Game"/>
+                                <connections>
+                                    <action selector="newGame:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5zm-Bg-JHL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>

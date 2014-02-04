@@ -17,6 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"%@",self.view.subviews);
     [self createGame];
     buttons = [NSArray arrayWithObjects:
                [self button1],
@@ -217,6 +218,11 @@
     }
     
     return isMatch;
+}
+
+- (IBAction)newGame:(id)sender
+{
+    [self createGame];
 }
 
 - (IBAction)cardPress:(id)sender {

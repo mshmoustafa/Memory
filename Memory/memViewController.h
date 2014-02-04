@@ -20,6 +20,7 @@
 //    NSString *secondCard;
 }
 
+
 - (void)createGame;
 
 - (void)initializeRandomPairs:(int)numberOfMatches;
@@ -31,6 +32,7 @@
 - (BOOL)checkIf:(int)card1 Matches:(int)card2;
 
 
+- (IBAction)newGame:(id)sender;
 - (IBAction)cardPress:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
