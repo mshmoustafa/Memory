@@ -13,6 +13,9 @@
     int score;
     int moves;
     
+    //still need to implement
+//    NSArray *scores;
+    
     NSArray *buttons;
     
     NSArray *cards;
@@ -26,6 +29,10 @@
 - (void)initializeRandomPairs:(int)numberOfMatches;
 
 - (void)setScore:(int)scoreToSet;
+
+//still need to implement
+//- (NSArray *)readScoresFromFile;
+//- (void)writeScoresToFile:(NSArray *)scoresToWrite;
 
 - (void)whichCardClicked:(UIButton *)cardNumber;
 
