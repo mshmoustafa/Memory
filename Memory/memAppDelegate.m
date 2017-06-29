@@ -13,6 +13,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    [[NSUserDefaults standardUserDefaults] setValue:@"medium" forKey:@"level"];
     return YES;
 }
 							

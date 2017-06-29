@@ -18,26 +18,56 @@
 {
     [super viewDidLoad];
     
-    NSLog(@"%@",self.view.subviews);
+    //NSLog(@"%@",self.view.subviews);
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    
+    
+#warning UIAlertView is deprecated
+    self.createGameConfirmation = [[UIAlertView alloc] initWithTitle:@"Start a new game?" message:nil delegate:self cancelButtonTitle:@"No stop!" otherButtonTitles: @"Go to start screen", @"Yes, please!", nil];
+    
+    colors = @[[UIColor redColor],
+               [UIColor yellowColor],
+               [UIColor blueColor],
+               [UIColor greenColor],
+               [UIColor orangeColor],
+               [UIColor purpleColor]];
     
     NSMutableArray *tempButtons = [[NSMutableArray alloc] init];
     
     float x = 0;
     float y = 0;
     
-    CGRect screenSize = [[UIScreen mainScreen] bounds];
-    CGSize buttonSize = CGSizeMake(screenSize.size.width / 4, screenSize.size.height / 6);
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"level"] isEqualToString:@"kids"]) {
+        numcols = 3;
+        numrows = 4;
+    } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"level"] isEqualToString:@"easy"]) {
+        numcols = 4;
+        numrows = 6;
+    } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"level"] isEqualToString:@"medium"]) {
+        numcols = 4;
+        numrows = 9;
+    } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"level"] isEqualToString:@"hard"]) {
+        numcols = 6;
+        numrows = 8;
+    } else {
+        numcols = 4;
+        numrows = 6;
+    }
     
-    for (int i = 0; i < 24; i++) {
+    numcards = numcols * numrows;
+    
+    CGRect screenSize = [[UIScreen mainScreen] bounds];
+    CGSize buttonSize = CGSizeMake(screenSize.size.width / numcols, screenSize.size.height / numrows);
+    
+    for (int i = 0; i < numcards; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-        [button addTarget:self action:@selector(cardPress:) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(cardPress:) forControlEvents:UIControlEventTouchDown];
         [button setTitle:@"◎" forState:UIControlStateNormal];
         button.tag = i;
         button.frame = CGRectMake(x, y, buttonSize.width, buttonSize.height);
         
-        if (((i+1) % 4) == 0 && i != 0) {
+        if (((i+1) % numcols) == 0 && i != 0) {
             x = 0;
             y += buttonSize.height;
         } else {
@@ -71,7 +101,7 @@
     
     //    secondCard = @"0";
 
-    UIAlertView *start = [[UIAlertView alloc] initWithTitle:@"Hello!" message:@"Tap on the little blue dots to flip cards over and make matches. Ready?" delegate:nil cancelButtonTitle:@"Let's Go!" otherButtonTitles:nil, nil];
+    UIAlertView *start = [[UIAlertView alloc] initWithTitle:@"Hello!" message:@"Tap on the little blue dots to flip cards over and make matches. Ready? \n\n Tip: shake the device at any time to start a new game." delegate:nil cancelButtonTitle:@"Let's Go!" otherButtonTitles:nil];
     
     [start show];
     
@@ -79,9 +109,14 @@
 
 //implemented UIAlertViewDelegate methods
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
+    
+    if (buttonIndex == 2) {
         [self createGame];
+        [self.createGameButton setEnabled:NO];
+    } else if (buttonIndex == 1) {
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
+    
 }
 
 - (void)createGame
@@ -98,7 +133,7 @@
         }completion:nil];
 
     }
-    [self initializeRandomPairs:12];
+    [self initializeRandomPairs:(numcards / 2)];
     [self setScore:0];
     moves = 0;
     firstCard = nil;
@@ -114,31 +149,44 @@
 {
     NSMutableArray *randomPairs = [NSMutableArray arrayWithCapacity:(numberOfMatches * 2)];
     
-    int numberRed = numberOfMatches / 2;
-    int numberYellow = numberOfMatches / 2;
-    int numberBlue = numberOfMatches / 2;
-    int numberGreen = numberOfMatches / 2;
+    int numberOfColors[colors.count];
+    
+    for (int i = 0; i < colors.count; i++) {
+//        numberOfMatches = numberOfMatches - numberOfMatches / 3;
+        numberOfColors[i] = numberOfMatches / (colors.count / 2);
+    }
+    
+//    int numberRed = numberOfMatches / 3;
+//    int numberYellow = numberOfMatches / 3;
+//    int numberBlue = numberOfMatches / 3;
+//    int numberGreen = numberOfMatches / 3;
+//    int numberOrange = numberOfMatches / 3;
+//    int numberPurple = numberOfMatches / 3;
     
     int random = 0;
+    BOOL someColorsRemain = YES;
     
 //    for (int i = 0; i < (numberOfMatches * 2); i++) {
-        while ((numberRed != 0) || (numberYellow != 0) || (numberBlue != 0) || (numberGreen != 0)) {
-            random = (arc4random() % 4 + 1);
-            NSLog(@"Random number: %d", random);
-            if (random == 1 && numberRed != 0) {
-                [randomPairs addObject:[UIColor redColor]];
-                numberRed--;
-            } else if (random == 2 && numberYellow != 0) {
-                [randomPairs addObject:[UIColor yellowColor]];
-                numberYellow--;
-            } else if (random == 3 && numberBlue != 0) {
-                [randomPairs addObject:[UIColor blueColor]];
-                numberBlue--;
-            } else if (random == 4 && numberGreen != 0) {
-                [randomPairs addObject:[UIColor greenColor]];
-                numberGreen--;
+        do {
+            
+            random = (arc4random_uniform((int)colors.count));
+//            NSLog(@"Random number: %d", random);
+            
+            if (numberOfColors[random] != 0) {
+                [randomPairs addObject:colors[random]];
+                numberOfColors[random]--;
             }
-        }
+            
+            someColorsRemain = NO;
+            
+            for (int i = 0; i < colors.count; i++) {
+                if (numberOfColors[i] != 0) {
+                    someColorsRemain = YES;
+                    break;
+                }
+            }
+            
+        } while (someColorsRemain);
 //        if (numberRed == 0 && numberYellow == 0 && numberBlue == 0 && numberGreen == 0) {
 //            //this shouldn't happen, do something about it
 //        } else if (numberRed == 0) {
@@ -169,11 +217,14 @@
         
         UIAlertView *win = [[UIAlertView alloc]
                             initWithTitle:@"You win!"
-                            message:[NSString stringWithFormat:@"You won in %d moves (the least number of moves to win is 12.)",moves]
+                            message:[NSString stringWithFormat:@"You won in %d moves (the least number of moves to win is %lu.)",moves,cards.count / 2]
                             delegate:self
                             cancelButtonTitle:@"OK"
-                            otherButtonTitles:@"New game", nil];
+                            otherButtonTitles:@"Go to start screen", @"New game", nil];
         [win show];
+        
+        [self.createGameButton setEnabled:YES];
+        
     } else {
 
     }
@@ -184,47 +235,65 @@
     if (firstCard == nil) {
         
         firstCard = cardNumber;
-        NSLog(@"First card is %d.", [firstCard tag]);
+        //NSLog(@"First card is %d.", [firstCard tag]);
         
     } else if (firstCard == cardNumber) {
         
         //do nothing - this means you clicked the first card again.
-        NSLog(@"You clicked on the same card!");
+        //NSLog(@"You clicked on the same card!");
         
     } else {
         
-        NSLog(@"Second card is %d.", [cardNumber tag]);
+        //NSLog(@"Second card is %d.", [cardNumber tag]);
         
         if ([self checkIf:[firstCard tag] Matches:[cardNumber tag]] == YES) {
             
-            NSLog(@"Match!");
+            //NSLog(@"Match!");
             
             [self setScore:(++score)];
             moves++;
             
-            [UIView transitionWithView:firstCard duration:0.2 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
-                [firstCard setEnabled:NO];
-                [firstCard setAlpha:(CGFloat)0.5];
+            [firstCard setEnabled:NO];
+            
+            [self.view bringSubviewToFront:firstCard];
+            
+            [UIView animateWithDuration:0.1 animations:^{
+                firstCard.transform = CGAffineTransformScale(firstCard.transform, 1.2, 1.2);
+//                [firstCard setAlpha:(CGFloat)0.5];
             }completion:^(BOOL finished){
-                firstCard = nil;
+                [UIView animateWithDuration:0.1 animations:^{
+                    firstCard.transform = CGAffineTransformScale(firstCard.transform, 1/1.2, 1/1.2);
+                } completion:^(BOOL finished) {
+                    firstCard = nil;
+                }];
             }];
             
-            [UIView transitionWithView:firstCard duration:0.2 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
-                [cardNumber setEnabled:NO];
-                [cardNumber setAlpha:(CGFloat)0.5];
+            [cardNumber setEnabled:NO];
+            
+            [self.view bringSubviewToFront:cardNumber];
+            
+            [UIView animateWithDuration:0.1 animations:^{
+                cardNumber.transform = CGAffineTransformScale(cardNumber.transform, 1.2, 1.2);
+                //                [firstCard setAlpha:(CGFloat)0.5];
             }completion:^(BOOL finished){
-                
+                [UIView animateWithDuration:0.1 animations:^{
+                    cardNumber.transform = CGAffineTransformScale(cardNumber.transform, 1/1.2, 1/1.2);
+                }];
             }];
+            
+//            [UIView transitionWithView:firstCard duration:0.2 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+//                [cardNumber setEnabled:NO];
+////                [cardNumber setAlpha:(CGFloat)0.5];
+//            }completion:nil];
             
 //            [firstCard setEnabled:NO];
 //            [firstCard setAlpha:(CGFloat)0.5];
 //            [cardNumber setEnabled:NO];
 //            [cardNumber setAlpha:(CGFloat)0.5];
             
-            firstCard = nil;
         } else {
             
-            NSLog(@"No match...");
+            //NSLog(@"No match...");
             
             moves++;
             
@@ -267,7 +336,7 @@
 
 - (IBAction)newGame:(id)sender
 {
-    [self createGame];
+    [self.createGameConfirmation show];
 }
 
 - (IBAction)cardPress:(id)sender {
@@ -292,9 +361,12 @@
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
-    UIAlertView *shaken = [[UIAlertView alloc] initWithTitle:@"Start a new game?" message:nil delegate:self cancelButtonTitle:@"No stop!" otherButtonTitles:@"Yes, please!", nil];
+    [self.createGameConfirmation show];
+}
 
-    [shaken show];
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
 }
 
 @end

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F0FA203E1892F8A0000B8740"
-               BuildableName = "Memory.app"
-               BlueprintName = "Memory"
-               ReferencedContainer = "container:Memory.xcodeproj">
+               BuildableName = "Beautimatch.app"
+               BlueprintName = "Beautimatch"
+               ReferencedContainer = "container:Beautimatch.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F0FA205F1892F8A0000B8740"
-               BuildableName = "MemoryTests.xctest"
-               BlueprintName = "MemoryTests"
-               ReferencedContainer = "container:Memory.xcodeproj">
+               BuildableName = "BeautimatchTests.xctest"
+               BlueprintName = "BeautimatchTests"
+               ReferencedContainer = "container:Beautimatch.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F0FA203E1892F8A0000B8740"
-            BuildableName = "Memory.app"
-            BlueprintName = "Memory"
-            ReferencedContainer = "container:Memory.xcodeproj">
+            BuildableName = "Beautimatch.app"
+            BlueprintName = "Beautimatch"
+            ReferencedContainer = "container:Beautimatch.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F0FA203E1892F8A0000B8740"
-            BuildableName = "Memory.app"
-            BlueprintName = "Memory"
-            ReferencedContainer = "container:Memory.xcodeproj">
+            BuildableName = "Beautimatch.app"
+            BlueprintName = "Beautimatch"
+            ReferencedContainer = "container:Beautimatch.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F0FA203E1892F8A0000B8740"
-            BuildableName = "Memory.app"
-            BlueprintName = "Memory"
-            ReferencedContainer = "container:Memory.xcodeproj">
+            BuildableName = "Beautimatch.app"
+            BlueprintName = "Beautimatch"
+            ReferencedContainer = "container:Beautimatch.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

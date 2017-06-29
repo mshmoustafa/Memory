@@ -13,8 +13,14 @@
     int score;
     int moves;
     
+    int numcols;
+    int numrows;
+    int numcards;
+    
     //still need to implement
 //    NSArray *scores;
+    
+    NSArray *colors;
     
     NSArray *buttons;
     
@@ -23,6 +29,8 @@
 //    NSString *secondCard;
 }
 
+@property (weak, nonatomic) IBOutlet UIButton *createGameButton;
+@property (strong, nonatomic) UIAlertView *createGameConfirmation;
 
 - (void)createGame;
 
