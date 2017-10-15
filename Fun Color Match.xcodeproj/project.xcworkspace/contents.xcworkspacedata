@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/sharif/programmingprojects/XCodeProjects/Memory/Fun Color Match.xcodeproj">
+      location = "group:/Users/sharif/programmingprojects/XCodeProjects/Memory/Memory/JCRBlurView.h">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/sharif/programmingprojects/XCodeProjects/Memory/Memory/JCRBlurView.m">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

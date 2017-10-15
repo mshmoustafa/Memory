@@ -7,6 +7,7 @@
 //
 
 #import "memViewController.h"
+#import "ILTranslucentView.h"
 
 @interface memViewController ()
 
@@ -14,14 +15,17 @@
 
 @implementation memViewController
 
+int BUTTONSVIEW = 1000;
+int STATUSVIEW = 2000;
+int MOVESLABEL = 3000;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    //NSLog(@"%@",self.view.subviews);
-    
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
+    buttonsView = [self.view viewWithTag:BUTTONSVIEW];
     
 #warning UIAlertView is deprecated
     self.createGameConfirmation = [[UIAlertView alloc] initWithTitle:@"Start a new game?" message:nil delegate:self cancelButtonTitle:@"No stop!" otherButtonTitles: @"Go to start screen", @"Yes, please!", nil];
@@ -60,6 +64,22 @@
     CGRect screenSize = [[UIScreen mainScreen] bounds];
     CGSize buttonSize = CGSizeMake(screenSize.size.width / numcols, screenSize.size.height / numrows);
     
+//    UIView* status = [self.view viewWithTag:STATUSVIEW];
+//    ILTranslucentView* blurView = [[ILTranslucentView alloc] initWithFrame:CGRectMake(0.0, 0.0, [[UIScreen mainScreen] bounds].size.width, status.frame.size.height)];
+//    blurView.translucent = YES;
+//    blurView.translucentAlpha = 1.0;
+//    blurView.translucentStyle = UIBarStyleDefault;
+//    blurView.translucentTintColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+//    blurView.backgroundColor = [UIColor clearColor];
+//    [blurView.leadingAnchor constraintEqualToAnchor:status.leadingAnchor];
+//    [blurView.trailingAnchor constraintEqualToAnchor:status.trailingAnchor];
+//    [blurView.topAnchor constraintEqualToAnchor:status.topAnchor];
+//    [blurView.heightAnchor constraintEqualToAnchor:status.heightAnchor];
+//    [blurView setFrame:CGRectMake(0.0, 0.0, status.frame.size.width, status.frame.size.height)];
+//    [status insertSubview:blurView atIndex:([status.subviews count]-1)];
+//    [status addSubview:blurView];
+    
+    
     for (int i = 0; i < numcards; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button addTarget:self action:@selector(cardPress:) forControlEvents:UIControlEventTouchDown];
@@ -75,33 +95,15 @@
         }
         
         [tempButtons addObject:button];
-        [self.view addSubview:button];
+        [buttonsView addSubview:button];
     }
     
     buttons = tempButtons;
-    
+    [self.view bringSubviewToFront:[self.view viewWithTag:MOVESLABEL]];
     
     [self createGame];
-    
-    //1 is yellow, 2 is red
-    //@1 is short for [NSNumber numberWithInt:1]
-    //    cards = @{@"1" : @1,
-    //              @"2" : @1,
-    //              @"3" : @2,
-    //              @"4" : @2,
-    //              };
-    
-    
-//    cards = [NSArray arrayWithObjects:
-//             [UIColor redColor],
-//             [UIColor redColor],
-//             [UIColor yellowColor],
-//             [UIColor yellowColor],
-//             Nil];
-    
-    //    secondCard = @"0";
 
-    UIAlertView *start = [[UIAlertView alloc] initWithTitle:@"Hello!" message:@"Tap on the little blue dots to flip cards over and make matches. Ready? \n\n Tip: shake the device at any time to start a new game." delegate:nil cancelButtonTitle:@"Let's Go!" otherButtonTitles:nil];
+    UIAlertView *start = [[UIAlertView alloc] initWithTitle:@"Get Ready!" message:@"Tap on the blue dots to reveal the colors and make matches. \n\n Try to match all the colors in the lowest number of moves you can! \n\n Ready? \n\n Tip: shake the device at any time to start a new game." delegate:nil cancelButtonTitle:@"Let's Go!" otherButtonTitles:nil];
     
     [start show];
     
@@ -134,8 +136,10 @@
 
     }
     [self initializeRandomPairs:(numcards / 2)];
-    [self setScore:0];
     moves = 0;
+    minMoves = (int)(cards.count / 2);
+    [self updateMovesLabel:0];
+    [self setScore:0];
     firstCard = nil;
 }
 
@@ -152,59 +156,31 @@
     int numberOfColors[colors.count];
     
     for (int i = 0; i < colors.count; i++) {
-//        numberOfMatches = numberOfMatches - numberOfMatches / 3;
         numberOfColors[i] = numberOfMatches / (colors.count / 2);
     }
-    
-//    int numberRed = numberOfMatches / 3;
-//    int numberYellow = numberOfMatches / 3;
-//    int numberBlue = numberOfMatches / 3;
-//    int numberGreen = numberOfMatches / 3;
-//    int numberOrange = numberOfMatches / 3;
-//    int numberPurple = numberOfMatches / 3;
     
     int random = 0;
     BOOL someColorsRemain = YES;
     
-//    for (int i = 0; i < (numberOfMatches * 2); i++) {
-        do {
-            
-            random = (arc4random_uniform((int)colors.count));
-//            NSLog(@"Random number: %d", random);
-            
-            if (numberOfColors[random] != 0) {
-                [randomPairs addObject:colors[random]];
-                numberOfColors[random]--;
+    do {
+        
+        random = (arc4random_uniform((int)colors.count));
+        
+        if (numberOfColors[random] != 0) {
+            [randomPairs addObject:colors[random]];
+            numberOfColors[random]--;
+        }
+        
+        someColorsRemain = NO;
+        
+        for (int i = 0; i < colors.count; i++) {
+            if (numberOfColors[i] != 0) {
+                someColorsRemain = YES;
+                break;
             }
-            
-            someColorsRemain = NO;
-            
-            for (int i = 0; i < colors.count; i++) {
-                if (numberOfColors[i] != 0) {
-                    someColorsRemain = YES;
-                    break;
-                }
-            }
-            
-        } while (someColorsRemain);
-//        if (numberRed == 0 && numberYellow == 0 && numberBlue == 0 && numberGreen == 0) {
-//            //this shouldn't happen, do something about it
-//        } else if (numberRed == 0) {
-//            [randomPairs addObject:[UIColor yellowColor]];
-//            numberYellow--;
-//        } else if (numberYellow == 0) {
-//            [randomPairs addObject:[UIColor redColor]];
-//            numberRed--;
-//        } else {
-//            if (random == 1) {
-//                [randomPairs addObject:[UIColor redColor]];
-//                numberRed--;
-//            } else if (random == 2) {
-//                [randomPairs addObject:[UIColor yellowColor]];
-//                numberYellow--;
-//            }
-//        }
-//    }
+        }
+        
+    } while (someColorsRemain);
     
     cards = [randomPairs copy];
 }
@@ -217,7 +193,7 @@
         
         UIAlertView *win = [[UIAlertView alloc]
                             initWithTitle:@"You win!"
-                            message:[NSString stringWithFormat:@"You won in %d moves (the least number of moves to win is %lu.)",moves,cards.count / 2]
+                            message:[NSString stringWithFormat:@"You won in %d moves (the lowest number of moves to win is %lu.)",moves,cards.count / 2]
                             delegate:self
                             cancelButtonTitle:@"OK"
                             otherButtonTitles:@"Go to start screen", @"New game", nil];
@@ -233,10 +209,7 @@
 - (void)whichCardClicked:(UIButton *)cardNumber
 {
     if (firstCard == nil) {
-        
         firstCard = cardNumber;
-        //NSLog(@"First card is %d.", [firstCard tag]);
-        
     } else if (firstCard == cardNumber) {
         
         //do nothing - this means you clicked the first card again.
@@ -244,22 +217,18 @@
         
     } else {
         
-        //NSLog(@"Second card is %d.", [cardNumber tag]);
-        
-        if ([self checkIf:[firstCard tag] Matches:[cardNumber tag]] == YES) {
+        if ([self checkIf:(int)[firstCard tag] Matches:(int)[cardNumber tag]] == YES) {
             
-            //NSLog(@"Match!");
-            
+            [self incrementMoves];
+            [self updateMovesLabel:moves];
             [self setScore:(++score)];
-            moves++;
             
             [firstCard setEnabled:NO];
             
-            [self.view bringSubviewToFront:firstCard];
+            [buttonsView bringSubviewToFront:firstCard];
             
             [UIView animateWithDuration:0.1 animations:^{
                 firstCard.transform = CGAffineTransformScale(firstCard.transform, 1.2, 1.2);
-//                [firstCard setAlpha:(CGFloat)0.5];
             }completion:^(BOOL finished){
                 [UIView animateWithDuration:0.1 animations:^{
                     firstCard.transform = CGAffineTransformScale(firstCard.transform, 1/1.2, 1/1.2);
@@ -270,42 +239,23 @@
             
             [cardNumber setEnabled:NO];
             
-            [self.view bringSubviewToFront:cardNumber];
+            [buttonsView bringSubviewToFront:cardNumber];
             
             [UIView animateWithDuration:0.1 animations:^{
                 cardNumber.transform = CGAffineTransformScale(cardNumber.transform, 1.2, 1.2);
-                //                [firstCard setAlpha:(CGFloat)0.5];
             }completion:^(BOOL finished){
                 [UIView animateWithDuration:0.1 animations:^{
                     cardNumber.transform = CGAffineTransformScale(cardNumber.transform, 1/1.2, 1/1.2);
                 }];
             }];
             
-//            [UIView transitionWithView:firstCard duration:0.2 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
-//                [cardNumber setEnabled:NO];
-////                [cardNumber setAlpha:(CGFloat)0.5];
-//            }completion:nil];
-            
-//            [firstCard setEnabled:NO];
-//            [firstCard setAlpha:(CGFloat)0.5];
-//            [cardNumber setEnabled:NO];
-//            [cardNumber setAlpha:(CGFloat)0.5];
-            
         } else {
-            
-            //NSLog(@"No match...");
-            
-            moves++;
-            
-//            [UIView animateWithDuration:1 animations:^{
-//                firstCard.backgroundColor = [UIColor clearColor];
-//                [firstCard setTitle:@"◎" forState:UIControlStateNormal];
-//            }];
+            [self incrementMoves];
+            [self updateMovesLabel:moves];
             [UIView transitionWithView:firstCard duration:0.8 options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationOptionAllowAnimatedContent | UIViewAnimationOptionBeginFromCurrentState animations:^{
                 
                 firstCard.backgroundColor = [UIColor clearColor];
                 [firstCard setTitle:@"◎" forState:UIControlStateNormal];
-//                [firstCard setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 
             } completion:nil];
             
@@ -325,13 +275,20 @@
 {
     BOOL isMatch = NO;
     
-    //    NSNumber *color1 = [cards objectAtIndex:[card1 intValue]];
-    
     if ([cards[card1] isEqual:cards[card2]]) {
         isMatch = YES;
     }
     
     return isMatch;
+}
+
+- (void)updateMovesLabel:(int)move {
+    UILabel* movesLabel = [self.view viewWithTag:MOVESLABEL];
+    movesLabel.text = [NSString stringWithFormat:@"%d / %d", move, minMoves];
+}
+
+- (void)incrementMoves {
+    moves = moves + 1;
 }
 
 - (IBAction)newGame:(id)sender
@@ -340,8 +297,6 @@
 }
 
 - (IBAction)cardPress:(id)sender {
-    //    [[self buttonOne] setBackgroundColor:(UIColor *)[UIColor redColor]];
-    
     [UIView transitionWithView:sender duration:0.2 options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationOptionAllowAnimatedContent animations:^{
         
         ((UIButton *) sender).backgroundColor = cards[((UIButton *) sender).tag];
@@ -350,13 +305,7 @@
         [self whichCardClicked:(UIButton *)sender];
     }];
     
-//    [UIView animateWithDuration:0.20 animations:^{
-//        ((UIButton *) sender).backgroundColor = cards[((UIButton *) sender).tag];
-//    }];
-    
     [((UIButton *) sender) setTitle:@"" forState:UIControlStateNormal];
-    
-//    [self whichCardClicked:(UIButton *)sender];
 }
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event

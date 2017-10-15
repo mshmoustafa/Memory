@@ -12,6 +12,7 @@
 {
     int score;
     int moves;
+    int minMoves;
     
     int numcols;
     int numrows;
@@ -27,6 +28,9 @@
     NSArray *cards;
     UIButton *firstCard;
 //    NSString *secondCard;
+    
+    UIView *buttonsView;
+    UIView *movesLabel;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *createGameButton;
