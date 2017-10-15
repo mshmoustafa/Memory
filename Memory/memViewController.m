@@ -68,22 +68,6 @@ CGFloat BUTTONFONTSIZE = 20.0;
     CGRect screenSize = [[UIScreen mainScreen] bounds];
     CGSize buttonSize = CGSizeMake(screenSize.size.width / numcols, screenSize.size.height / numrows);
     
-//    UIView* status = [self.view viewWithTag:STATUSVIEW];
-//    ILTranslucentView* blurView = [[ILTranslucentView alloc] initWithFrame:CGRectMake(0.0, 0.0, [[UIScreen mainScreen] bounds].size.width, status.frame.size.height)];
-//    blurView.translucent = YES;
-//    blurView.translucentAlpha = 1.0;
-//    blurView.translucentStyle = UIBarStyleDefault;
-//    blurView.translucentTintColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-//    blurView.backgroundColor = [UIColor clearColor];
-//    [blurView.leadingAnchor constraintEqualToAnchor:status.leadingAnchor];
-//    [blurView.trailingAnchor constraintEqualToAnchor:status.trailingAnchor];
-//    [blurView.topAnchor constraintEqualToAnchor:status.topAnchor];
-//    [blurView.heightAnchor constraintEqualToAnchor:status.heightAnchor];
-//    [blurView setFrame:CGRectMake(0.0, 0.0, status.frame.size.width, status.frame.size.height)];
-//    [status insertSubview:blurView atIndex:([status.subviews count]-1)];
-//    [status addSubview:blurView];
-    
-    
     for (int i = 0; i < numcards; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button addTarget:self action:@selector(cardPress:) forControlEvents:UIControlEventTouchDown];
