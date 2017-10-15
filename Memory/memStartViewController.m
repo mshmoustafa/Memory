@@ -48,22 +48,6 @@
     
     self.shouldCycleColors = YES;
     [self cycleBackgroundColor];
-    //    int randomNumber = arc4random_uniform((int)self.colors.count);
-    //
-    //    [UIView transitionWithView:self.view duration:1.0 options:UIViewAnimationOptionRepeat animations:^{
-    //
-    ////        do {
-    //
-    //        UIColor *randomColor = self.colors[randomNumber];
-    ////        } while (<#condition#>);
-    //
-    //        self.view.backgroundColor = self.colors[randomNumber];
-    //
-    //    }completion:^(BOOL finished){
-    //        randomNumber = arc4random_uniform((int)self.colors.count);
-    //
-    //        self.view.backgroundColor = self.colors[randomNumber];
-    //    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -136,7 +120,7 @@
             }
         };
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Select Level" message:@"Select a level" preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Select Level" message:@"Select a level" preferredStyle:UIAlertControllerStyleAlert];
         
         [alert addAction:[UIAlertAction actionWithTitle:@"Kids" style:UIAlertActionStyleDefault handler:actionBlock]];
         
