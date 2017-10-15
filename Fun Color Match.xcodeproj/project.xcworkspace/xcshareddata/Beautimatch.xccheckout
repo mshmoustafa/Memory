@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>939DD14A-00DB-460B-BF71-D4AA016C2B99</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Beautimatch</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3B1C2A4A6F5C1D2317D4E1D732F1629D3EB19801</key>
+		<string>https://github.com/mshmoustafa/Memory.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Beautimatch.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3B1C2A4A6F5C1D2317D4E1D732F1629D3EB19801</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/mshmoustafa/Memory.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3B1C2A4A6F5C1D2317D4E1D732F1629D3EB19801</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3B1C2A4A6F5C1D2317D4E1D732F1629D3EB19801</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Memory</string>
+		</dict>
+	</array>
+</dict>
+</plist>

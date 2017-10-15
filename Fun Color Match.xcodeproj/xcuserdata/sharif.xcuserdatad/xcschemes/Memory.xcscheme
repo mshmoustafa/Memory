@@ -15,18 +15,18 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F0FA203E1892F8A0000B8740"
-               BuildableName = "Beautimatch.app"
+               BuildableName = "Color Match.app"
                BlueprintName = "Beautimatch"
-               ReferencedContainer = "container:Beautimatch.xcodeproj">
+               ReferencedContainer = "container:Fun Color Match.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      buildConfiguration = "Debug">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "F0FA205F1892F8A0000B8740"
                BuildableName = "BeautimatchTests.xctest"
                BlueprintName = "BeautimatchTests"
-               ReferencedContainer = "container:Beautimatch.xcodeproj">
+               ReferencedContainer = "container:Fun Color Match.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,46 +43,51 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F0FA203E1892F8A0000B8740"
-            BuildableName = "Beautimatch.app"
+            BuildableName = "Color Match.app"
             BlueprintName = "Beautimatch"
-            ReferencedContainer = "container:Beautimatch.xcodeproj">
+            ReferencedContainer = "container:Fun Color Match.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
    </TestAction>
    <LaunchAction
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F0FA203E1892F8A0000B8740"
-            BuildableName = "Beautimatch.app"
+            BuildableName = "Color Match.app"
             BlueprintName = "Beautimatch"
-            ReferencedContainer = "container:Beautimatch.xcodeproj">
+            ReferencedContainer = "container:Fun Color Match.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F0FA203E1892F8A0000B8740"
-            BuildableName = "Beautimatch.app"
+            BuildableName = "Color Match.app"
             BlueprintName = "Beautimatch"
-            ReferencedContainer = "container:Beautimatch.xcodeproj">
+            ReferencedContainer = "container:Fun Color Match.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

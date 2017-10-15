@@ -41,7 +41,7 @@
 		F0E11DBE193FD32D00623167 /* memStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = memStartViewController.m; sourceTree = "<group>"; };
 		F0E11DC21940050500623167 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		F0E11DC41940050C00623167 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		F0FA203F1892F8A0000B8740 /* Beautimatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beautimatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0FA203F1892F8A0000B8740 /* Color Match.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Color Match.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0FA20421892F8A0000B8740 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F0FA20441892F8A0000B8740 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F0FA20461892F8A0000B8740 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -101,7 +101,7 @@
 		F0FA20401892F8A0000B8740 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F0FA203F1892F8A0000B8740 /* Beautimatch.app */,
+				F0FA203F1892F8A0000B8740 /* Color Match.app */,
 				F0FA20601892F8A0000B8740 /* BeautimatchTests.xctest */,
 			);
 			name = Products;
@@ -182,7 +182,7 @@
 			);
 			name = Beautimatch;
 			productName = Memory;
-			productReference = F0FA203F1892F8A0000B8740 /* Beautimatch.app */;
+			productReference = F0FA203F1892F8A0000B8740 /* Color Match.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F0FA205F1892F8A0000B8740 /* BeautimatchTests */ = {
@@ -229,7 +229,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F0FA203A1892F8A0000B8740 /* Build configuration list for PBXProject "Beautimatch" */;
+			buildConfigurationList = F0FA203A1892F8A0000B8740 /* Build configuration list for PBXProject "Fun Color Match" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -410,8 +410,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Memory/Beautimatch-Prefix.pch";
 				INFOPLIST_FILE = "Memory/Beautimatch-Info.plist";
-				PRODUCT_NAME = Beautimatch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.muhammadsharifmoustafa.Beautimatch;
+				PRODUCT_NAME = "Color Match";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -427,8 +429,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Memory/Beautimatch-Prefix.pch";
 				INFOPLIST_FILE = "Memory/Beautimatch-Info.plist";
-				PRODUCT_NAME = Beautimatch;
+				PRODUCT_BUNDLE_IDENTIFIER = com.muhammadsharifmoustafa.Beautimatch;
+				PRODUCT_NAME = "Color Match";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -478,7 +482,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F0FA203A1892F8A0000B8740 /* Build configuration list for PBXProject "Beautimatch" */ = {
+		F0FA203A1892F8A0000B8740 /* Build configuration list for PBXProject "Fun Color Match" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F0FA206F1892F8A0000B8740 /* Debug */,

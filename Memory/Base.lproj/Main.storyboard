@@ -31,10 +31,10 @@
                                             <constraint firstAttribute="height" constant="83" id="eTG-Vw-1sp"/>
                                         </constraints>
                                         <attributedString key="attributedText">
-                                            <fragment content="Beautimatch">
+                                            <fragment content="Fun Color Match">
                                                 <attributes>
                                                     <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <font key="NSFont" size="45" name="ArialRoundedMTBold"/>
+                                                    <font key="NSFont" size="35" name="ArialRoundedMTBold"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                 </attributes>
                                             </fragment>

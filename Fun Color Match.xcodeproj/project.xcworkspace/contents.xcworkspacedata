@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Beautimatch.xcodeproj">
+      location = "self:/Users/sharif/programmingprojects/XCodeProjects/Memory/Fun Color Match.xcodeproj">
    </FileRef>
 </Workspace>
