@@ -18,6 +18,10 @@
 int BUTTONSVIEW = 1000;
 int STATUSVIEW = 2000;
 int MOVESLABEL = 3000;
+NSString* BUTTONTITLE = @"✪";
+//◉✪●◎
+CGFloat BUTTONFONTSIZE = 20.0;
+
 
 - (void)viewDidLoad
 {
@@ -83,7 +87,8 @@ int MOVESLABEL = 3000;
     for (int i = 0; i < numcards; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button addTarget:self action:@selector(cardPress:) forControlEvents:UIControlEventTouchDown];
-        [button setTitle:@"◎" forState:UIControlStateNormal];
+        [button setTitle:BUTTONTITLE forState:UIControlStateNormal];
+        [button.titleLabel setFont:[UIFont systemFontOfSize:BUTTONFONTSIZE]];
         button.tag = i;
         button.frame = CGRectMake(x, y, buttonSize.width, buttonSize.height);
         
@@ -103,7 +108,7 @@ int MOVESLABEL = 3000;
     
     [self createGame];
 
-    UIAlertView *start = [[UIAlertView alloc] initWithTitle:@"Get Ready!" message:@"Tap on the blue dots to reveal the colors and make matches. \n\n Try to match all the colors in the lowest number of moves you can! \n\n Ready? \n\n Tip: shake the device at any time to start a new game." delegate:nil cancelButtonTitle:@"Let's Go!" otherButtonTitles:nil];
+    UIAlertView *start = [[UIAlertView alloc] initWithTitle:@"Get Ready!" message:@"Tap on the stars to reveal the colors and make matches. \n\n Try to match all the colors in the lowest number of moves you can! \n\n Ready? \n\n Tip: shake the device at any time to start a new game." delegate:nil cancelButtonTitle:@"Let's Go!" otherButtonTitles:nil];
     
     [start show];
     
@@ -130,7 +135,8 @@ int MOVESLABEL = 3000;
             [button setBackgroundColor:[UIColor clearColor]];
             [button setEnabled:YES];
             [button setAlpha:(CGFloat)1.0];
-            [button setTitle:@"◎" forState:UIControlStateNormal];
+            [button setTitle:BUTTONTITLE forState:UIControlStateNormal];
+            [button.titleLabel setFont:[UIFont systemFontOfSize:BUTTONFONTSIZE]];
             
         }completion:nil];
 
@@ -255,15 +261,16 @@ int MOVESLABEL = 3000;
             [UIView transitionWithView:firstCard duration:0.8 options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationOptionAllowAnimatedContent | UIViewAnimationOptionBeginFromCurrentState animations:^{
                 
                 firstCard.backgroundColor = [UIColor clearColor];
-                [firstCard setTitle:@"◎" forState:UIControlStateNormal];
+                [firstCard setTitle:BUTTONTITLE forState:UIControlStateNormal];
+                [firstCard.titleLabel setFont:[UIFont systemFontOfSize:BUTTONFONTSIZE]];
                 
             } completion:nil];
             
             [UIView transitionWithView:cardNumber duration:0.8 options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationOptionAllowAnimatedContent animations:^{
                 
                 cardNumber.backgroundColor = [UIColor clearColor];
-                [cardNumber setTitle:@"◎" forState:UIControlStateNormal];
-                
+                [cardNumber setTitle:BUTTONTITLE forState:UIControlStateNormal];
+                [cardNumber.titleLabel setFont:[UIFont systemFontOfSize:BUTTONFONTSIZE]];
             }completion:nil];
             
             firstCard = nil;
